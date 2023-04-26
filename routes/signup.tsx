@@ -18,14 +18,16 @@ export default function Signup() {
               type="email"
               name="email"
               id="email"
+              placeholder="Email"
             />
             <input
               class="bg-gray-400 rounded p-2"
               type="password"
               name="password"
               id="password"
+              placeholder="Password"
             />
-            <button type="submit">Signup</button>
+            <button class="" type="submit">Signup</button>
           </form>
         </section>
       </main>

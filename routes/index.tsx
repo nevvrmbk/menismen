@@ -1,8 +1,15 @@
 import { Head } from "$fresh/runtime.ts";
+import { Handlers, PageProps } from "$fresh/server.ts";
 import Counter from "../islands/Counter.tsx";
 import Todo from "../islands/Todo.tsx";
 
-export default function Home() {
+export const handler: Handlers = {
+  GET(req, ctx) {
+    return ctx.render(JSON.stringify(Object.fromEntries(req.headers)));
+  },
+};
+
+export default function Home(props: PageProps) {
   return (
     <>
       <Head>
@@ -20,6 +27,7 @@ export default function Home() {
         </p>
         <Counter start={3} />
         <Todo />
+        <pre>{ props.data }</pre>
       </div>
     </>
   );
