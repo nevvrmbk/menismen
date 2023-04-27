@@ -5,30 +5,45 @@ import Todo from "../islands/Todo.tsx";
 
 export const handler: Handlers = {
   GET(req, ctx) {
-    return ctx.render(JSON.stringify(Object.fromEntries(req.headers)));
+    const ip = ctx.remoteAddr;
+    return ctx.render(
+      { ip, ...Object.fromEntries(req.headers) },
+    );
   },
 };
 
 export default function Home(props: PageProps) {
+  console.log({ props });
   return (
     <>
       <Head>
-        <title>Fresh App</title>
+        <title>Sample Fresh Apps</title>
       </Head>
-      <div class="p-4 mx-auto max-w-screen-md">
-        <img
-          src="/logo.svg"
-          class="w-32 h-32"
-          alt="the fresh logo: a sliced lemon dripping with juice"
-        />
+      <header>
+        <nav class="flex flex-row justify-around items-center">
+          <a href="/">
+            <img
+              src="/logo.svg"
+              class="w-24 h-24"
+              alt="the fresh logo: a sliced lemon dripping with juice"
+            />
+          </a>
+          <div class="flex">
+            <a class="mx-2" href="/resolve">Resolve</a>
+            <a class="mx-2" href="/login">Login</a>
+            <a class="mx-2" href="/signup">Signup</a>
+          </div>
+        </nav>
+      </header>
+      <main class="p-4 mx-auto max-w-screen-md">
         <p class="my-6">
           Welcome to `fresh`. Try updating this message in the
           ./routes/index.tsx file, and refresh.
         </p>
         <Counter start={3} />
         <Todo />
-        <pre>{ props.data }</pre>
-      </div>
+        <pre>{props.data}</pre>
+      </main>
     </>
   );
 }
